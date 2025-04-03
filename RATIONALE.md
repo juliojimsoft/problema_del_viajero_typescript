@@ -18,7 +18,7 @@ el TspDistanceResponseDto
 ##Fuente: https://www.youtube.com/watch?v=6M6m6kSnruw
 ##fuente: https://es.slideshare.net/slideshow/el-problema-del-agente-viajero-resuelto-por-fuerza-programacin-dinmica-y-voraz/60995423
 ##fuente: https://medium.com/opex-analytics/heuristic-algorithms-for-the-traveling-salesman-problem-6a53d8143584
-##fuente: ChatGpt
+##fuente: DeepSeek
 
 Grafo, estructura de datos, asume que las conexiones son bidireccionales
 Aleatoriedad: La seleccion de vecinos es aleatoria (no es optima)
