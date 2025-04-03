@@ -1,3 +1,4 @@
+import { TspDistanceResponseDto } from 'src/tsp/dtos/response/generate-cities.response.dto';
 import { City, Coordinates } from './city';
 
 export interface Bounds {
@@ -55,6 +56,30 @@ export class World {
         );
 
         return !isInSet && !!this.citiesSet.push(city);
+    }
+
+    /**
+     * Calcular las distancias
+     * 
+    */
+    getDistances(): TspDistanceResponseDto[]{
+        const distances: TspDistanceResponseDto[]=[];
+        for(let i= 0; i<this.citiesSet.length;i++){
+            for(let j=i+1;j<this.citiesSet.length;j++){
+                const cityA = this.citiesSet[i];
+                const cityB = this.citiesSet[j];
+
+                const dx = cityA.coordinates.x - cityB.coordinates.x;
+                const dy = cityA.coordinates.y - cityB.coordinates.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                distances.push({
+                    from: cityA.name,
+                    to:cityB.name,
+                    distance:parseFloat(distance.toFixed(2)),
+                })
+            }
+        }
+        return distances;
     }
 }
 

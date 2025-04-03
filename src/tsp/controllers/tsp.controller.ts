@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { TspService } from '../tsp.service';
 import { TspSolveResponseDto } from '../dtos/response/solve.response.dto';
 import { TspSolveRequestDto } from '../dtos/request/solve.request.dto';
@@ -23,5 +23,10 @@ export class TspController {
         @Body() payload: TspGenerateCitiesRequestDto,
     ): TspGenerateCitiesResponseDto {
         return this.tspService.generateCities(payload);
+    }
+
+    @Get('ping')
+    ping() {
+        return { message: 'API funcionando!' };
     }
 }

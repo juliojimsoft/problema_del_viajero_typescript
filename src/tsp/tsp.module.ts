@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TspController } from './controllers/tsp.controller';
 import { TspService } from './tsp.service';
+import { TspSolver } from './domain/tsp-solver/tsp-solver';
 
 /**
  * The TspModule class is a NestJS module that encapsulates the components
@@ -13,6 +14,6 @@ import { TspService } from './tsp.service';
 @Module({
     imports: [],
     controllers: [TspController],
-    providers: [TspService],
+    providers: [TspService, TspSolver],
 })
 export class TspModule {}

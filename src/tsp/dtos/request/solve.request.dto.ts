@@ -2,6 +2,7 @@ import {
     IsNotEmpty,
     IsNumber,
     IsString,
+    MaxLength,
     MinLength,
     ValidateNested,
 } from 'class-validator';
@@ -26,7 +27,9 @@ export class TspDistanceRequestDto {
  * Defines the request structure for solving the TSP.
  */
 export class TspSolveRequestDto {
-    @MinLength(2, { each: true })
+    @MinLength(1, { each: true })
+    @MaxLength(2, { each: true })
+    
     cities: string[];
 
     @ValidateNested()

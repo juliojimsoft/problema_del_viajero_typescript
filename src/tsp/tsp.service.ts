@@ -4,6 +4,7 @@ import { TspSolveRequestDto } from './dtos/request/solve.request.dto';
 import { TspGenerateCitiesResponseDto } from './dtos/response/generate-cities.response.dto';
 import { WorldGenerator } from './domain/world-generator/world-generator';
 import { TspGenerateCitiesRequestDto } from './dtos/request/generate-cities.request.dto';
+import { TspSolver } from './domain/tsp-solver/tsp-solver';
 
 /**
  * The TspService class is a NestJS service responsible for implementing the
@@ -12,14 +13,18 @@ import { TspGenerateCitiesRequestDto } from './dtos/request/generate-cities.requ
  */
 @Injectable()
 export class TspService {
-    solve(payload: TspSolveRequestDto): TspSolveResponseDto {
-        void payload;
-        throw new NotImplementedException(
-            `${this.solve.name} method not implemented in ${TspService.name}`,
-        );
+    constructor(private readonly solver: TspSolver){}
 
+    solve(payload: TspSolveRequestDto): TspSolveResponseDto {
+        const {cities,distances} = payload;
+        
         // To do
         // - Implement TSP solver
+        const result = this.solver.solve(cities, distances);
+        return{
+            route: result.route,
+            totalDistance:result.totalDistance
+        }
     }
 
     generateCities(
@@ -29,14 +34,16 @@ export class TspService {
             x: payload.worldBoundX,
             y: payload.worldBoundY,
         });
-
+        //crea ciudades aleatorias en memoria genera internamente las ciudades
+        //modifica estado interno
         worldGenerator.generateCities();
-
         // To do
+        //obtiene un objeto world, con las ciudades generadas
+        const world = worldGenerator.getWorld();
         // - Calculate distance between cities
-
-        throw new NotImplementedException(
-            `${this.generateCities.name} method not implemented in ${TspService.name}`,
-        );
+        return {
+            cities:world.cities.map(city => city.name),
+            distances: world.getDistances(),
+        }
     }
 }

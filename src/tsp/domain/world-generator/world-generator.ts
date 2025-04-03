@@ -35,6 +35,7 @@ export class WorldGenerator {
         for (let i = 0; i < this.numOfCities; i++) {
             this.world.addCity(new City(ALPHABET[i], COORDINATES[i]));
         }
+        
     }
 
     /**
